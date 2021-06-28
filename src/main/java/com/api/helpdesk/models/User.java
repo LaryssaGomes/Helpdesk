@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,8 +48,8 @@ public class User {
 	@Column
 	private Boolean active = true;
 
-	// Definindo tipo da relação
-	@ManyToMany(cascade = CascadeType.ALL)
+	// Definindo tipo da rela
+	@ManyToMany
 	// Criando nova tabela e definindo elementos
 	@JoinTable(name = "users_roles", 
 	   joinColumns = @JoinColumn(name = "user_id"), 
@@ -56,7 +57,6 @@ public class User {
 	private Set<Role> roles;
 	
 	public User(String email, String name, String lastName, String password, Boolean active) {
-		super();
 		this.email = email;
 		this.name = name;
 		this.lastName = lastName;
@@ -65,7 +65,6 @@ public class User {
 	}
 
 	public User(Long id, String email, String name, String lastName, String password, Boolean active) {
-		super();
 		this.id = id;
 		this.email = email;
 		this.name = name;

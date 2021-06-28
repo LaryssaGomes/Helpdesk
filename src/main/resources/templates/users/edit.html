@@ -7,7 +7,7 @@
 	<th:block layout:fragment="content">
 		<div class="col-xs-12 col-md-12 text-center">
 			<h4>Edit a User</h4>
-			<form action="" th:action="@{/users/{id}(id = ${user.id})}" th:object="${user}" th:method="put">
+			<form action="" th:action="@{/users/useredit/{id}(id = ${user.id})}" th:object="${user}" th:method="post">
 				<input type="hidden" th:field="*{id}"/>	
 				<div class="row">
 					<div class="form-group col-md-6 col-xs-12">

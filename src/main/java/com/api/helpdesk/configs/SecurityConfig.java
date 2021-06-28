@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		/*
+		
 		http
 			.authorizeRequests()
 			.antMatchers("/login")
@@ -53,7 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.and()
 					.exceptionHandling() 
 					.accessDeniedPage("/denied");
-			*/
 	}
 	
 	@Override
@@ -74,12 +73,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.jdbcAuthentication()
-				.usersByUsernameQuery(" select usr.email, usr.password, usr.active from users usr where usr.email = ? and usr.active = 1")
+				.usersByUsernameQuery(" select usr.email, usr.password, usr.active from users usr where usr.email = ? and usr.active = true")
 				.authoritiesByUsernameQuery(" select usr.email, rl.name from users usr " +
 											" inner join users_roles usrr on (usr.id = usrr.user_id) " +
 											" inner join roles rl on (usrr.role_id = rl.id)" +
 											" where usr.email = ? " +
-											" and   usr.active = 1")
+											" and   usr.active = true")
 				.dataSource(dataSource)
 				.passwordEncoder(bCryptPasswordEncoder); 
 		
